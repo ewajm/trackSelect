@@ -1,4 +1,11 @@
 var android, rails, net, design;
+var trackClassArray = [];
+var trackArray = [
+  {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "https://css-tricks.com/", colorScheme: "designDisplay", value: 0},
+  {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework, which is used in phones, tablets, and watches", link: "https://developer.android.com/index.html", colorScheme: "androidDisplay", value: 0},
+  {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://rubyonrails.org/", colorScheme: "railsDisplay"},
+  {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "https://www.microsoft.com/net", colorScheme: "netDisplay", value:0}
+];
 
 function q1Check(value){
   if(value === 1){
@@ -69,12 +76,6 @@ function q5Check(value){
 
 function getTrack(preferred){
   var track;
-  var trackArray = [
-    {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "https://css-tricks.com/", colorScheme: "design"},
-    {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework, which is used in phones, tablets, and watches", link: "https://developer.android.com/index.html", colorScheme: "android"},
-    {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://rubyonrails.org/", colorScheme: "rails"},
-    {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "https://www.microsoft.com/net", colorScheme: "net"}
-  ];
   if(design > net && design > android && design > rails){
     track = trackArray[0];
   } else if (android > net && android > design && android > rails){
@@ -106,6 +107,13 @@ $(document).ready(function(){
     $("div").removeClass("has-error");
     //get values
     var name= $("#name").val();
+    var questionClassArray=[];
+    for (var i = 1; i < 6; i++){
+      var curQuestion = "input:radio[name=question"+i+"]:checked";
+      var classArray = $(curQuestion).attr("class").split(" ");
+      questionClassArray.push(classArray);
+      console.log(questionClassArray);
+    }
     var question1 = parseInt($("input:radio[name=question1]:checked").val());
     var question2 = parseInt($("input:radio[name=question2]:checked").val());
     var question3 = parseInt($("input:radio[name=question3]:checked").val());

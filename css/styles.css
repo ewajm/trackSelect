@@ -64,25 +64,25 @@ footer {
 
 /***jumbotron display classes**/
 
-.design {
+.designDisplay {
   background-color: #428bca;
   border: solid 4px #d9534f;
   color: #f9f9f9;
 }
 
-.android {
+.androidDisplay {
   background-color: #009688;
   border: solid 4px #54b2a9;
   color: #83d0c9;
 }
 
-.net {
+.netDisplay {
   background-color: #0099ff;
   border: solid 4px #99cc33;
   color: #FFE064;
 }
 
-.rails {
+.railsDisplay {
   background-color: #8b0015;
   border: solid 4px #36000e;
   color: #fff3f4;
