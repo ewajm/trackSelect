@@ -1,10 +1,10 @@
 var android, rails, net, design;
 var trackClassArray = ["design", "android", "rails", "net"];
 var trackArray = [
-  {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "https://css-tricks.com/", colorScheme: "designDisplay", value: 0},
-  {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework, which is used in phones, tablets, and watches", link: "https://developer.android.com/index.html", colorScheme: "androidDisplay", value: 0},
-  {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://rubyonrails.org/", colorScheme: "railsDisplay", value:0},
-  {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "https://www.microsoft.com/net", colorScheme: "netDisplay", value:0}
+  {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "https://css-tricks.com/", colorScheme: "designDisplay", count: 0},
+  {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework, which is used in phones, tablets, and watches", link: "https://developer.android.com/index.html", colorScheme: "androidDisplay", count: 0},
+  {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://rubyonrails.org/", colorScheme: "railsDisplay", count:0},
+  {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "https://www.microsoft.com/net", colorScheme: "netDisplay", count:0}
 ];
 
 function q1Check(value){
@@ -75,16 +75,18 @@ function q5Check(value){
 }
 
 function checkClassArray(questionClassArray){
-
-  questionClassArray.forEach(function(classArray){
-    console.log(classArray);
+  for(var j = 0; j < questionClassArray.length; j++){
     for(var i = 0; i < trackClassArray.length; i++){
-      if(classArray.includes(trackClassArray[i])){
-        trackArray[i].value++;
-        console.log(trackArray[i].name + " " + trackArray[i].value);
+      if(questionClassArray[j].includes(trackClassArray[i])){
+        trackArray[i].count++;
+        console.log(trackArray[i].name + " " + trackArray[i].count);
       }
     }
+  }
+  trackArray.sort(function(a, b){
+    return b.count-a.count;
   });
+  console.log(trackArray);
 }
 
 function getTrack(preferred){
@@ -110,6 +112,9 @@ function resetValues(){
   rails=0;
   net=0;
   design=0;
+  for(var i = 0; i < trackArray.length; i++){
+    trackArray[i].value = 0;
+  }
 }
 
 $(document).ready(function(){
