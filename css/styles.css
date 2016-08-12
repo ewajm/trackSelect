@@ -7,8 +7,6 @@ form {;
 }
 
 .formDiv {
-  background-color: #bfb5b2;
-  border: solid 4px #83adb5;
   padding: 1.5rem;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -20,6 +18,11 @@ form {;
   font-weight: bold;
   font-size: 300%;
   margin-bottom: 3rem;
+}
+
+.basicDisplay {
+  background-color: #bfb5b2;
+  border: solid 4px #83adb5;
 }
 
 .radio-label {
@@ -49,6 +52,17 @@ form {;
   display: none;
 }
 
+.success a: {
+  color: #2e4045;
+}
+
+.success a:visited{
+  color: #849399;
+}
+
+.success a:hover, a:focus {
+  color: #E0E2E3;
+}
 
 
 /***jumbotron display classes**/
@@ -71,7 +85,7 @@ form {;
   color: #ffcc00;
 }
 
-.ruby {
+.rails {
   background-color: #8b0015;
   border: solid 4px #36000e;
   color: #fff3f4;

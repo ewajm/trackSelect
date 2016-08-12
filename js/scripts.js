@@ -70,8 +70,8 @@ function getTrack(preferred){
   var track;
   var trackArray = [
     {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "http://www.epicodus.com/design", colorScheme: "design"},
-    {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework used in phones, tablets, and watches", link: "http://www.epicodus.com/android", colorScheme: "android"},
-    {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby /(after learning the fundamentals of Ruby, of course!/)", link: "http://www.epicodus.com/rails", colorScheme: "rails"},
+    {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework, which is used in phones, tablets, and watches", link: "http://www.epicodus.com/android", colorScheme: "android"},
+    {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://www.epicodus.com/rails", colorScheme: "rails"},
     {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "http://www.epicodus.com/net", colorScheme: "net"}];
   if(design > net && design > android && design > rails){
     track = trackArray[0];
@@ -89,15 +89,21 @@ function getTrack(preferred){
   return track;
 }
 
+function resetValues(){
+  android=0;
+  rails=0;
+  net=0;
+  design=0;
+}
+
 
 $(document).ready(function(){
+  var track;
   //on form submit
   $("form").submit(function(event){
     event.preventDefault();
-    android=0;
-    rails=0;
-    net=0;
-    design=0;
+    //0 out previous values
+    resetValues();
     //get values
     var name= $("#name").val();
     var question1 = parseInt($("input:radio[name=question1]:checked").val());
@@ -116,7 +122,7 @@ $(document).ready(function(){
       q5Check(question5);
     }
     //get and display result
-    var track = getTrack(question5);
+    track = getTrack(question5);
     $(".formDiv").hide();
     $(".nameOut").text(name);
     if(track === "unclear"){
@@ -132,6 +138,16 @@ $(document).ready(function(){
   });
 
   //on 'try again' button click
-
+  $("#again").click(function(){
+    $(".output").hide();
+    $(".unclear").hide();
+    $(".success").hide();
+    $(".formDiv").show();
+    $("form")[0].reset();
+    if(track){
+      $(".success").removeClass(track.colorScheme);
+    }
+    resetValues();
+  });
 
 });
