@@ -6,24 +6,24 @@ function q1Check(value){
     android++;
     net++;
   } else if(value=== 3){
-    net++;
+    net+=2;
   }
 }
 
 function q2Check(value){
   if(value === 1){
-    design++;
+    design+=2;
   } else if(value === 2){
     android++;
     net++;
   } else {
-    rails++;
+    rails+=2;
   }
 }
 
 function q3Check(value){
   if(value === 1){
-    android++;
+    android+=2;
   } else if (value === 2){
     design++;
   }
@@ -68,8 +68,11 @@ function q5Check(value){
 
 function getTrack(preferred){
   var track;
-  var trackArray = ["CSS/Design", "Java/Android", "Ruby/Rails", "C#/.Net"];
-  var valueArray = [design, android, rails, net];
+  var trackArray = [
+    {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "http://www.epicodus.com/design"},
+    {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework used in phones, tablets, and watches", link: "http://www.epicodus.com/android"},
+    {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby /(after learning the fundamentals of Ruby, of course!/)", link: "http://www.epicodus.com/rails"},
+    {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "http://www.epicodus.com/net"}];
   if(design > net && design > android && design > rails){
     track = trackArray[0];
   } else if (android > net && android > design && android > rails){
@@ -91,7 +94,7 @@ $(document).ready(function(){
   $("form").submit(function(event){
     event.preventDefault();
     android=0;
-    ruby=0;
+    rails=0;
     net=0;
     design=0;
     var name= $("#name").val();
@@ -112,6 +115,16 @@ $(document).ready(function(){
       console.log("design: " + design + " net: " + net + " rails: " + rails + " android: " + android);
     }
     var track = getTrack(question5);
-    console.log(track);
+    $(".formDiv").hide();
+    $(".nameOut").text(name);
+    if(track === "unclear"){
+      $(".unclear").toggle();
+    } else {
+      $(".trackName").text(track.name);
+      $("#description").text(track.description);
+      $("#trackLink").html("here".link(track.link));
+      $(".success").toggle();
+    }
+    $(".output").toggle();
   });
 });
