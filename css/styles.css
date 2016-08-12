@@ -10,6 +10,7 @@ form {;
   padding: 1.5rem;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  border-radius: 5px;
 }
 
 .formDiv h1{
@@ -52,12 +53,8 @@ form {;
   display: none;
 }
 
-.success a: {
+.success a, a:visited{
   color: #2e4045;
-}
-
-.success a:visited{
-  color: #849399;
 }
 
 .success a:hover, a:focus {
@@ -82,7 +79,7 @@ form {;
 .net {
   background-color: #0099ff;
   border: solid 4px #99cc33;
-  color: #ffcc00;
+  color: #FFE064;
 }
 
 .rails {

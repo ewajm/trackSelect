@@ -1,4 +1,5 @@
 var android, rails, net, design;
+
 function q1Check(value){
   if(value === 1){
     rails++;
@@ -69,10 +70,10 @@ function q5Check(value){
 function getTrack(preferred){
   var track;
   var trackArray = [
-    {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "http://www.epicodus.com/design", colorScheme: "design"},
-    {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework, which is used in phones, tablets, and watches", link: "http://www.epicodus.com/android", colorScheme: "android"},
-    {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://www.epicodus.com/rails", colorScheme: "rails"},
-    {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "http://www.epicodus.com/net", colorScheme: "net"}];
+    {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "https://css-tricks.com/", colorScheme: "design"},
+    {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework, which is used in phones, tablets, and watches", link: "https://developer.android.com/index.html", colorScheme: "android"},
+    {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://rubyonrails.org/", colorScheme: "rails"},
+    {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "https://www.microsoft.com/net", colorScheme: "net"}];
   if(design > net && design > android && design > rails){
     track = trackArray[0];
   } else if (android > net && android > design && android > rails){
@@ -95,7 +96,6 @@ function resetValues(){
   net=0;
   design=0;
 }
-
 
 $(document).ready(function(){
   var track;
@@ -120,30 +120,31 @@ $(document).ready(function(){
       q3Check(question3);
       q4Check(question4);
       q5Check(question5);
+
+      //get and display result
+      $(".formDiv").fadeOut();
+      track = getTrack(question5);
+      $(".nameOut").text(name);
+      if(track === "unclear"){
+        $(".unclear").show();
+      } else {
+        $(".trackName").text(track.name);
+        $("#description").text(track.description);
+        $("#trackLink").html("here".link(track.link));
+        $(".success").addClass(track.colorScheme);
+        $(".success").show();
+      }
+      $(".output").fadeIn("slow");
     }
-    //get and display result
-    track = getTrack(question5);
-    $(".formDiv").hide();
-    $(".nameOut").text(name);
-    if(track === "unclear"){
-      $(".unclear").toggle();
-    } else {
-      $(".trackName").text(track.name);
-      $("#description").text(track.description);
-      $("#trackLink").html("here".link(track.link));
-      $(".success").addClass(track.colorScheme);
-      $(".success").toggle();
-    }
-    $(".output").toggle();
   });
 
   //on 'try again' button click
   $("#again").click(function(){
-    $(".output").hide();
+    $(".output").fadeOut();
     $(".unclear").hide();
     $(".success").hide();
-    $(".formDiv").show();
     $("form")[0].reset();
+    $(".formDiv").fadeIn("slow");
     if(track){
       $(".success").removeClass(track.colorScheme);
     }
