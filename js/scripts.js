@@ -1,9 +1,9 @@
 var android, rails, net, design;
-var trackClassArray = [];
+var trackClassArray = ["design", "android", "rails", "net"];
 var trackArray = [
   {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "https://css-tricks.com/", colorScheme: "designDisplay", value: 0},
   {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework, which is used in phones, tablets, and watches", link: "https://developer.android.com/index.html", colorScheme: "androidDisplay", value: 0},
-  {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://rubyonrails.org/", colorScheme: "railsDisplay"},
+  {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://rubyonrails.org/", colorScheme: "railsDisplay", value:0},
   {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "https://www.microsoft.com/net", colorScheme: "netDisplay", value:0}
 ];
 
@@ -74,6 +74,19 @@ function q5Check(value){
   }
 }
 
+function checkClassArray(questionClassArray){
+
+  questionClassArray.forEach(function(classArray){
+    console.log(classArray);
+    for(var i = 0; i < trackClassArray.length; i++){
+      if(classArray.includes(trackClassArray[i])){
+        trackArray[i].value++;
+        console.log(trackArray[i].name + " " + trackArray[i].value);
+      }
+    }
+  });
+}
+
 function getTrack(preferred){
   var track;
   if(design > net && design > android && design > rails){
@@ -110,10 +123,12 @@ $(document).ready(function(){
     var questionClassArray=[];
     for (var i = 1; i < 6; i++){
       var curQuestion = "input:radio[name=question"+i+"]:checked";
-      var classArray = $(curQuestion).attr("class").split(" ");
-      questionClassArray.push(classArray);
-      console.log(questionClassArray);
+      var classString = $(curQuestion).attr("class");
+      if(classString){
+      questionClassArray.push(classString.split(" "));
+      }
     }
+    checkClassArray(questionClassArray);
     var question1 = parseInt($("input:radio[name=question1]:checked").val());
     var question2 = parseInt($("input:radio[name=question2]:checked").val());
     var question3 = parseInt($("input:radio[name=question3]:checked").val());
