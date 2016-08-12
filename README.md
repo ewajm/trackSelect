@@ -6,7 +6,7 @@
 
 ## Description
 
-_A single page website that holds a survey that, once filled out, displays the Epicodus track that fits the user's answers best. Branching practice._
+_A single page interactive website with a survey that, once filled out, displays the Epicodus track that fits the user's answers best. Branching practice._
 
 ## Setup/Installation Requirements
 
