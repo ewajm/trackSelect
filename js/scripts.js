@@ -102,8 +102,7 @@ $(document).ready(function(){
   //on form submit
   $("form").submit(function(event){
     event.preventDefault();
-    //0 out previous values
-    resetValues();
+    $("div").removeClass("has-error");
     //get values
     var name= $("#name").val();
     var question1 = parseInt($("input:radio[name=question1]:checked").val());
@@ -111,16 +110,36 @@ $(document).ready(function(){
     var question3 = parseInt($("input:radio[name=question3]:checked").val());
     var question4 = parseInt($("input:radio[name=question4]:checked").val());
     var question5 = parseInt($("input:radio[name=question5]:checked").val());
-    //check values
+
+    //check if survey is filled out
     if(!name || !question1 || !question2 || !question3 || !question4 || !question5){
-      alert("Please answer all questions!")
+      if(!name){
+        $("#name").parent().addClass("has-error");
+      }
+      if(!question1){
+        $('input[name=question1]').parents(".form-group").addClass("has-error");
+      }
+      if(!question2){
+        $('input[name=question2]').parents(".form-group").addClass("has-error");
+      }
+      if(!question3){
+        $('input[name=question3]').parents(".form-group").addClass("has-error");
+      }
+      if(!question4){
+        $('input[name=question4]').parents(".form-group").addClass("has-error");
+      }
+      if(!question5){
+        $('input[name=question5]').parents(".form-group").addClass("has-error");
+      }
     } else {
+      //0 out previous values
+      resetValues();
+      //get values
       q1Check(question1);
       q2Check(question2);
       q3Check(question3);
       q4Check(question4);
       q5Check(question5);
-
       //get and display result
       $(".formDiv").fadeOut();
       track = getTrack(question5);
@@ -137,7 +156,6 @@ $(document).ready(function(){
       $(".output").fadeIn("slow");
     }
   });
-
   //on 'try again' button click
   $("#again").click(function(){
     $(".output").fadeOut();
@@ -150,5 +168,4 @@ $(document).ready(function(){
     }
     resetValues();
   });
-
 });
