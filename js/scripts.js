@@ -69,10 +69,10 @@ function q5Check(value){
 function getTrack(preferred){
   var track;
   var trackArray = [
-    {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "http://www.epicodus.com/design"},
-    {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework used in phones, tablets, and watches", link: "http://www.epicodus.com/android"},
-    {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby /(after learning the fundamentals of Ruby, of course!/)", link: "http://www.epicodus.com/rails"},
-    {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "http://www.epicodus.com/net"}];
+    {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "http://www.epicodus.com/design", colorScheme: "design"},
+    {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework used in phones, tablets, and watches", link: "http://www.epicodus.com/android", colorScheme: "android"},
+    {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby /(after learning the fundamentals of Ruby, of course!/)", link: "http://www.epicodus.com/rails", colorScheme: "rails"},
+    {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "http://www.epicodus.com/net", colorScheme: "net"}];
   if(design > net && design > android && design > rails){
     track = trackArray[0];
   } else if (android > net && android > design && android > rails){
@@ -91,19 +91,21 @@ function getTrack(preferred){
 
 
 $(document).ready(function(){
+  //on form submit
   $("form").submit(function(event){
     event.preventDefault();
     android=0;
     rails=0;
     net=0;
     design=0;
+    //get values
     var name= $("#name").val();
     var question1 = parseInt($("input:radio[name=question1]:checked").val());
     var question2 = parseInt($("input:radio[name=question2]:checked").val());
     var question3 = parseInt($("input:radio[name=question3]:checked").val());
     var question4 = parseInt($("input:radio[name=question4]:checked").val());
     var question5 = parseInt($("input:radio[name=question5]:checked").val());
-    //console.log(question1 + " " + question2 + " " + question3 + " " + question4 + " " + question5);
+    //check values
     if(!name || !question1 || !question2 || !question3 || !question4 || !question5){
       alert("Please answer all questions!")
     } else {
@@ -112,8 +114,8 @@ $(document).ready(function(){
       q3Check(question3);
       q4Check(question4);
       q5Check(question5);
-      console.log("design: " + design + " net: " + net + " rails: " + rails + " android: " + android);
     }
+    //get and display result
     var track = getTrack(question5);
     $(".formDiv").hide();
     $(".nameOut").text(name);
@@ -123,8 +125,13 @@ $(document).ready(function(){
       $(".trackName").text(track.name);
       $("#description").text(track.description);
       $("#trackLink").html("here".link(track.link));
+      $(".success").addClass(track.colorScheme);
       $(".success").toggle();
     }
     $(".output").toggle();
   });
+
+  //on 'try again' button click
+
+
 });
