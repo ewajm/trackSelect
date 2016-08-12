@@ -14,116 +14,132 @@
       <h1>Epicodus Track Selector</h1>
       <form>
         <div class="form-group">
-          <label for="question1">Name:</label>
-          <input type="text" id="question1" class="form-control">
+          <label for="name">Name:</label>
+          <input type="text" id="name" class="form-control">
         </div>
-        <!--end question1-->
-        <label for="question2">What kind of business would you like to work for?</label>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question2" id="optionsRadios1" value="1" checked>
-            A small start-up would be great!
-          </label>
+        <!--end name fields-->
+        <div class="form-group">
+          <label class="radio-label" for="question1">1. What kind of business would you like to work for?</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question1" id="company1" value="1" checked>
+              A small start-up would be great!
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question1" id="company2" value="2">
+              Big companies = (hopefully) more stability. A++
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question1" id="company3" value="3">
+              I hear that government pensions are nice...
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question1" id="company4" value="4">
+              No preference
+            </label>
+          </div>
         </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question2" id="optionsRadios2" value="2">
-            Big companies = more job security. A++
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question2" id="optionsRadios3" value="3">
-            I hear that government pensions are nice...
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question2" id="optionsRadios3" value="3">
-            No preference
-          </label>
+        <!--end question 1-->
+        <div class="form-group">
+          <label for="question2" class="radio-label">2. What do you enjoy most when working on projects?</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question2" id="enjoy1" value="1" checked>
+              Trying to come up with the perfect color scheme
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question2" id="enjoy2" value="2">
+              Working out the logic for the stuff going on behind the scenes
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question2" id="enjoy3" value="3">
+              Making it interactive
+            </label>
+          </div>
         </div>
         <!--end question 2-->
-        <label for="question3">What do you enjoy most when working on projects?</label>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question3" id="optionsRadios1" value="1" checked>
-            Trying to come up with the perfect color scheme
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question3" id="optionsRadios2" value="2">
-            Working out the logic for the stuff going on behind the scenes
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question3" id="optionsRadios3" value="3">
-            Making it interactive
-          </label>
+        <div class="form-group">
+          <label for="question3">3. How do you feel about mobile app development?</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question3" id="mobile1" value="1" checked>
+              Sounds super neat!
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question3" id="mobile2" value="2">
+              Meh.
+            </label>
+          </div>
         </div>
         <!--end question 3-->
-        <label for="question4">How do you feel about mobile app development?</label>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question4" id="optionsRadios1" value="1" checked>
-            Sounds super neat!
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question4" id="optionsRadios2" value="2">
-            Meh.
-          </label>
+        <div class="form-group">
+          <label for="question4">4. Do you want to keep developing for web?</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question4" id="web1" value="1" checked>
+              Yes, definitely
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question4" id="web2" value="2">
+              I could go either way
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question4" id="web3" value="3">
+              Not really...
+            </label>
+          </div>
         </div>
         <!--end question 4-->
-        <label for="question5">Do you want to keep developing for web?</label>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question5" id="optionsRadios1" value="1" checked>
-            Yes, definitely
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question5" id="optionsRadios2" value="2">
-            I could go either way
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question5" id="optionsRadios3" value="3">
-            Not really...
-          </label>
+        <div class="form-group">
+          <label for="question5">5. Finally, which track are you leaning toward right now?</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question5" id="track1" value="1" checked>
+              CSS/Design
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question5" id="track2" value="2">
+              Java/Android
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question5" id="track3" value="3">
+              Ruby/Rails
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question5" id="track4" value="4">
+              C#/.Net
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question5" id="track5" value="5">
+              No idea!
+            </label>
+          </div>
         </div>
         <!--end question 5-->
-        <label for="question6">Which track are you leaning toward right now?</label>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question6" id="optionsRadios1" value="1" checked>
-            CSS/Design
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question6" id="optionsRadios2" value="2">
-            Java/Android
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question6" id="optionsRadios3" value="3">
-            Ruby/Rails
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="question6" id="optionsRadios3" value="3">
-            C#/.Net
-          </label>
-        </div>
-        <!--end question 6-->
         <button type="submit" class="btn btn-primary btn-lg">What do I dooooooo?</button>
       </form>
     </div><!--end container div-->

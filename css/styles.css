@@ -2,11 +2,8 @@ body {
   background-color: #2e4045;
 }
 
-h1{
-  text-align: center;
-  font-family: verdana;
-  font-weight: bold;
-  font-size: 300%;
+form {;
+  margin: 0 auto;
 }
 
 .formDiv {
@@ -14,6 +11,28 @@ h1{
   border: solid 4px #83adb5;
   padding: 1.5rem;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.formDiv h1{
+  text-align: center;
+  font-family: verdana;
+  font-weight: bold;
+  font-size: 300%;
+  margin-bottom: 3rem;
+}
+
+.radio-label {
+  margin-bottom: 0;
+}
+
+.radio {
+  margin-top:0;
+}
+
+.btn {
+  margin: 0 auto;
+  display: block;
 }
 
 .output {
@@ -26,10 +45,9 @@ h1{
   width: 90%;
 }
 
-.btn {
-  margin: 0 auto;
-  display: block;
-}
+
+
+/***jumbotron display classes**/
 
 .design {
   background-color: #428bca;
@@ -53,4 +71,19 @@ h1{
   background-color: #8b0015;
   border: solid 4px #36000e;
   color: #fff3f4;
+}
+
+/******MEDIA QUERIES*********/
+
+@media screen and (min-width: 768px){
+  form {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 992px){
+  form {
+    width: 55%;
+  }
+
 }
