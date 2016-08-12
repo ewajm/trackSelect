@@ -79,6 +79,12 @@
           <div class="radio">
             <label>
               <input type="radio" name="question3" id="mobile2" value="2">
+              Only if I get to design the UI
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="question3" id="mobile3" value="3">
               Meh.
             </label>
           </div>
@@ -144,10 +150,15 @@
       </form>
     </div><!--end container div-->
     <div class="container output">
-      <div class="jumbotron">
+      <div class="jumbotron success">
         <h1>You should try <span class="trackName"></span></h1>
         <p>Hi <span class="nameOut"></span>! Thank you for filling out this survey.  Based on your results, I think you should check out <span class="trackName"></span>.  In the <span class="trackName"></span> track, you can <span id="description"></span>.  You can read more about <span class="trackName"></span> <span id="trackLink"></span></p>
       </div>
+      <div class="jumbotron unclear">
+        <h1>The future is uncertain!</span></h1>
+        <p>Hi <span class="nameOut"></span>! Thank you for filling out this survey.  Unfortunately, the survey was unable to produce a clear winner. You can either try to take it again with or read more about the various tracks!</p>
+      </div>
+      <button id="again" class="btn btn-primary btn-lg">Try Again!</button>
     </div>
   </body>
 </html>
