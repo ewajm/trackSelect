@@ -86,24 +86,35 @@ function checkClassArray(questionClassArray){
   trackArray.sort(function(a, b){
     return b.count-a.count;
   });
-  console.log(trackArray);
 }
 
 function getTrack(preferred){
-  var track;
-  if(design > net && design > android && design > rails){
-    track = trackArray[0];
-  } else if (android > net && android > design && android > rails){
-    track = trackArray[1];
-  } else if (rails > design && rails > net && rails > android){
-    track= trackArray[2];
-  } else if (net > android && net > design && net > rails){
-    track= trackArray[3];
-  } else if(preferred !== 5){
-    track=trackArray[preferred-1];
-  } else {
-    track = "unclear";
+  var track = [];
+  var i = 0;
+  do {
+    track.push(trackClassArray[i]);
+    i++;
+  } while (i < trackClassArray.length-1 && trackClassArray[i].count === trackClassArray[i+1].count)
+  if(track.length > 2){
+    if(preferred !== 5){
+      track.push(trackClassArray[preferred-1]);
+    } else {
+      track.push("unclear");
+    }
   }
+  // if(design > net && design > android && design > rails){
+  //   track = trackArray[0];
+  // } else if (android > net && android > design && android > rails){
+  //   track = trackArray[1];
+  // } else if (rails > design && rails > net && rails > android){
+  //   track= trackArray[2];
+  // } else if (net > android && net > design && net > rails){
+  //   track= trackArray[3];
+  // } else if(preferred !== 5){
+  //   track=trackArray[preferred-1];
+  // } else {
+  //   track = "unclear";
+  // }
   return track;
 }
 
@@ -113,7 +124,7 @@ function resetValues(){
   net=0;
   design=0;
   for(var i = 0; i < trackArray.length; i++){
-    trackArray[i].value = 0;
+    trackArray[i].count = 0;
   }
 }
 
@@ -126,14 +137,6 @@ $(document).ready(function(){
     //get values
     var name= $("#name").val();
     var questionClassArray=[];
-    for (var i = 1; i < 6; i++){
-      var curQuestion = "input:radio[name=question"+i+"]:checked";
-      var classString = $(curQuestion).attr("class");
-      if(classString){
-      questionClassArray.push(classString.split(" "));
-      }
-    }
-    checkClassArray(questionClassArray);
     var question1 = parseInt($("input:radio[name=question1]:checked").val());
     var question2 = parseInt($("input:radio[name=question2]:checked").val());
     var question3 = parseInt($("input:radio[name=question3]:checked").val());
@@ -164,11 +167,14 @@ $(document).ready(function(){
       //0 out previous values
       resetValues();
       //get values
-      q1Check(question1);
-      q2Check(question2);
-      q3Check(question3);
-      q4Check(question4);
-      q5Check(question5);
+      for (var i = 1; i < 6; i++){
+        var curQuestion = "input:radio[name=question"+i+"]:checked";
+        var classString = $(curQuestion).attr("class");
+        if(classString){
+        questionClassArray.push(classString.split(" "));
+        }
+      }
+      checkClassArray(questionClassArray);
       //get and display result
       $(".formDiv").fadeOut();
       track = getTrack(question5);
@@ -176,10 +182,19 @@ $(document).ready(function(){
       if(track === "unclear"){
         $(".unclear").show();
       } else {
-        $(".trackName").text(track.name);
-        $("#description").text(track.description);
-        $("#trackLink").html("here".link(track.link));
-        $(".success").addClass(track.colorScheme);
+        var i = 0;
+        do {
+          $(".trackName").append(track[i].name);
+          $("#description").append(track[i].description);
+          $("#trackLink").append("here".link(track[i].link));
+          i++;
+          if(i != track.length){
+            $(".trackName").append(" or ");
+            $("#description").append("while in the " + track[i].name + " track you can ");
+            $("#trackLink").append(" or " + "here".link(track[i].link));
+          }
+        } while (i < track.length)
+        $(".success").addClass(track[0].colorScheme);
         $(".success").show();
       }
       $(".output").fadeIn("slow");
@@ -190,6 +205,7 @@ $(document).ready(function(){
     $(".output").fadeOut();
     $(".unclear").hide();
     $(".success").hide();
+    $(".success").children().text("");
     $("form")[0].reset();
     $(".formDiv").fadeIn("slow");
     if(track){
