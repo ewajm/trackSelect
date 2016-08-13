@@ -1,85 +1,16 @@
-var android, rails, net, design;
 var trackClassArray = ["design", "android", "rails", "net"];
 var trackArray = [
-  {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "https://css-tricks.com/", colorScheme: "designDisplay", count: 0},
-  {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework, which is used in phones, tablets, and watches", link: "https://developer.android.com/index.html", colorScheme: "androidDisplay", count: 0},
-  {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://rubyonrails.org/", colorScheme: "railsDisplay", count:0},
-  {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "https://www.microsoft.com/net", colorScheme: "netDisplay", count:0}
+  {name: "CSS/Design", description: "get a solid foundation in design principles and learn about the current industry-standard tools", link: "https://css-tricks.com/", colorScheme: "designDisplay", count: 0, order: 1},
+  {name:"Java/Android", description:"learn the fundamentals of Java and then move on to the Android framework, which is used in phones, tablets, and watches", link: "https://developer.android.com/index.html", colorScheme: "androidDisplay", count: 0, order: 2},
+  {name: "Ruby/Rails", description: "get an introduction to the Rails framework for Ruby (after learning the fundamentals of Ruby, of course!)", link: "http://rubyonrails.org/", colorScheme: "railsDisplay", count:0, order: 3},
+  {name: "C#/.Net", description: "get a solid foundation in a language and framework used by many large businesses and government agencies", link: "https://www.microsoft.com/net", colorScheme: "netDisplay", count:0, order: 4}
 ];
-
-function q1Check(value){
-  if(value === 1){
-    rails++;
-  } else if(value === 2){
-    android++;
-    net++;
-  } else if(value=== 3){
-    net+=2;
-  }
-}
-
-function q2Check(value){
-  if(value === 1){
-    design+=2;
-  } else if(value === 2){
-    android++;
-    net++;
-  } else {
-    rails+=2;
-  }
-}
-
-function q3Check(value){
-  if(value === 1){
-    android+=2;
-  } else if (value === 2){
-    design++;
-  }
-}
-
-function q4Check(value){
-  if(value === 1){
-    rails++;
-    design++;
-  } else if(value === 2){
-    net++;
-    design++;
-  } else if(value=== 3){
-    android++;
-    net++;
-  }
-}
-
-function q5Check(value){
-  if(value === 1){
-    design++;
-  } else if(value === 2){
-    android++;
-  } else if(value=== 3){
-    rails++;
-  } else if(value=== 4){
-    net++;
-  }
-}
-
-function q5Check(value){
-  if(value === 1){
-    design++;
-  } else if(value === 2){
-    android++;
-  } else if(value=== 3){
-    rails++;
-  } else if(value=== 4){
-    net++;
-  }
-}
 
 function checkClassArray(questionClassArray){
   for(var j = 0; j < questionClassArray.length; j++){
     for(var i = 0; i < trackClassArray.length; i++){
       if(questionClassArray[j].includes(trackClassArray[i])){
         trackArray[i].count++;
-        console.log(trackArray[i].name + " " + trackArray[i].count);
       }
     }
   }
@@ -96,36 +27,24 @@ function getTrack(preferred){
     i++;
   } while (i < trackArray.length-1 && trackArray[i-1].count === trackArray[i].count)
   if(track.length > 2){
+    track = [];
     if(preferred !== 5){
       track.push(trackArray[preferred-1]);
     } else {
       track.push("unclear");
     }
   }
-  // if(design > net && design > android && design > rails){
-  //   track = trackArray[0];
-  // } else if (android > net && android > design && android > rails){
-  //   track = trackArray[1];
-  // } else if (rails > design && rails > net && rails > android){
-  //   track= trackArray[2];
-  // } else if (net > android && net > design && net > rails){
-  //   track= trackArray[3];
-  // } else if(preferred !== 5){
-  //   track=trackArray[preferred-1];
-  // } else {
-  //   track = "unclear";
-  // }
   return track;
 }
 
 function resetValues(){
-  android=0;
-  rails=0;
-  net=0;
-  design=0;
   for(var i = 0; i < trackArray.length; i++){
     trackArray[i].count = 0;
   }
+  trackArray.sort(function(a, b){
+    return a.order-b.order;
+  });
+  console.log(trackArray);
 }
 
 $(document).ready(function(){
@@ -136,7 +55,6 @@ $(document).ready(function(){
     $("div").removeClass("has-error");
     //get values
     var name= $("#name").val();
-    var questionClassArray=[];
     var question1 = parseInt($("input:radio[name=question1]:checked").val());
     var question2 = parseInt($("input:radio[name=question2]:checked").val());
     var question3 = parseInt($("input:radio[name=question3]:checked").val());
@@ -167,11 +85,13 @@ $(document).ready(function(){
       //0 out previous values
       resetValues();
       //get values
+      var questionClassArray=[];
       for (var i = 1; i < 6; i++){
         var curQuestion = "input:radio[name=question"+i+"]:checked";
         var classString = $(curQuestion).attr("class");
         if(classString){
-        questionClassArray.push(classString.split(" "));
+        var curArray = classString.split(" ");
+        questionClassArray.push(curArray);
         }
       }
       checkClassArray(questionClassArray);
@@ -183,9 +103,18 @@ $(document).ready(function(){
       if(track === "unclear"){
         $(".unclear").show();
       } else {
-          $(".trackName").append(track[0].name);
-          $("#description").append(track[0].description);
-          $("#trackLink").append("here".link(track[0].link));
+        var i = 0;
+        do{
+          $(".trackName").append(track[i].name);
+          $("#description").append(track[i].description);
+          $("#trackLink").append("here".link(track[i].link));
+          if(i <track.length-1){
+            $(".trackName").append(" or ");
+            $("#description").append("; alternately, in the " + track[i+1].name + " track, you can ");
+            $("#trackLink").append(" and ");
+          }
+          i++;
+        } while (i < track.length);
         $(".success").addClass(track[0].colorScheme);
         $(".success").show();
       }
