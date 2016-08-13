@@ -92,12 +92,12 @@ function getTrack(preferred){
   var track = [];
   var i = 0;
   do {
-    track.push(trackClassArray[i]);
+    track.push(trackArray[i]);
     i++;
-  } while (i < trackClassArray.length-1 && trackClassArray[i].count === trackClassArray[i+1].count)
+  } while (i < trackArray.length-1 && trackArray[i-1].count === trackArray[i].count)
   if(track.length > 2){
     if(preferred !== 5){
-      track.push(trackClassArray[preferred-1]);
+      track.push(trackArray[preferred-1]);
     } else {
       track.push("unclear");
     }
@@ -178,22 +178,14 @@ $(document).ready(function(){
       //get and display result
       $(".formDiv").fadeOut();
       track = getTrack(question5);
+      console.log(track);
       $(".nameOut").text(name);
       if(track === "unclear"){
         $(".unclear").show();
       } else {
-        var i = 0;
-        do {
-          $(".trackName").append(track[i].name);
-          $("#description").append(track[i].description);
-          $("#trackLink").append("here".link(track[i].link));
-          i++;
-          if(i != track.length){
-            $(".trackName").append(" or ");
-            $("#description").append("while in the " + track[i].name + " track you can ");
-            $("#trackLink").append(" or " + "here".link(track[i].link));
-          }
-        } while (i < track.length)
+          $(".trackName").append(track[0].name);
+          $("#description").append(track[0].description);
+          $("#trackLink").append("here".link(track[0].link));
         $(".success").addClass(track[0].colorScheme);
         $(".success").show();
       }
@@ -205,11 +197,11 @@ $(document).ready(function(){
     $(".output").fadeOut();
     $(".unclear").hide();
     $(".success").hide();
-    $(".success").children().text("");
+    $("span").empty();
     $("form")[0].reset();
     $(".formDiv").fadeIn("slow");
     if(track){
-      $(".success").removeClass(track.colorScheme);
+      $(".success").removeClass(track[0].colorScheme);
     }
     resetValues();
   });
